@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+ 
+{% block main %}
+<div class="container">
+  <div class="row my-5">
+    <div class="col-12 col-lg-6">
+      <div class="bg-white border overflow-hidden">
+        <img src="/{{ object.image }}" width="100%">
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div class="border p-3 text-left text-dark overflow-hidden">
+        <h2 class="display-5">{{object.name}}</h2>
+        <p class="lead">
+          <a href="/categories/{{object.category.slug}}/"
+            class="badge badge-pill badge-warning">{{object.category.name}}</a>
+          {% for tag in object.tags.all %}
+          <a href="/tags/{{tag.slug}}/" class="badge badge-pill badge-light">#{{tag}}</a>
+          {% endfor %}
+        </p>
+        <p class="lead">${{object.price}}</p>
+        <p class="lead">{{object.description}}</p>
+        {% if purchased_formats %}
+        <div class="lead">You have already puachased these formats</div>
+        {% endif %}
+        <ul>
+          {% for purchased in purchased_captures %}
+          <li><a href="/{{purchased.data}}">{{purchased.format}}</a> <i class="bi bi-file-zip"></i></li>
+          {% endfor %}
+        </ul>
+
+        <form action="/cart/add/" method="POST" class="">
+          {% csrf_token %}
+          <input type="hidden" name="item_pk" value="{{object.pk}}">
+          <p class="lead">
+            Select Formats
+
+            {% for format in object.formats.all %}
+
+            {% if format.name not in purchased_formats %}
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="formats" value="{{format}}" id="{{format}}">
+              <label class="form-check-label" for="{{format}}">
+                {{ format }}
+              </label>
+            </div>
+            {% endif %}
+
+            {% endfor %}
+          </p>
+          <p>
+            <button type="submit" class="btn btn-success">Add to cart</button>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <h2>Recommendations</h2>
+  <div class="row mb-5">
+    {% for object in RECENT_ITEMS %}
+    {% if forloop.counter < 4 %}
+    <div class="col-12 col-lg-3 my-3">
+      {% include 'snippets/item_box.html' %}
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

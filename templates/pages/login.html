@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+ 
+{% block main %}
+<div class="container my-5">
+  <div class="row ">
+    <div class="col-12 offset-md-4">
+      <h1 class="col-md-4 text-center">
+        Login
+      </h1>
+      <br>
+      <div class="col-md-4 text-center">
+        Need a Tokyo DSP account? <a href="/account/signup/">Signup an account</a>
+      </div>
+      <br>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label>Email</label>
+            <input type="email" class="form-control" name="username" placeholder="Email" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
+          </div>
+        </div>
+        <button class="btn btn-info btm-sm col-md-4" type="submit">
+          Login
+        </button>
+      </form>
+      <div class="col-md-4 my-2 text-center">
+        <a href="/account/password_reset/">Forgot your Password?</a>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+{% endblock %}

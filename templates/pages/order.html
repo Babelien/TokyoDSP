@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+ 
+{% block main %}
+ 
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <h1>Order</h1>
+      <h2 class="my-4">注文情報</h2>
+      <table class="table mb-5">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">No.</th>
+            <td>{{object.pk}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Price</th>
+            <td>${{object.amount}}</td>
+          </tr>
+          <tr>
+            <th scope="row">In Tax</th>
+            <td>${{object.tax_included}}</td>
+          </tr>
+ 
+          <tr>
+            <th scope="row">注文確定日</th>
+            <td>{{object.created_at|date:"Y-m-d f"}}</td>
+          </tr>
+          <tr>
+            <th scope="row">UID</th>
+            <td>{{object.uid}}</td>
+          </tr>
+          <tr>
+            <th scope="row">郵便番号</th>
+            <td>{{shipping.0.fields.zipcode}}</td>
+          </tr>
+          <tr>
+            <th scope="row">都道府県</th>
+            <td>{{shipping.0.fields.prefecture}}</td>
+          </tr>
+          <tr>
+            <th scope="row">市区</th>
+            <td>{{shipping.0.fields.city}}</td>
+          </tr>
+          <tr>
+            <th scope="row">住所1</th>
+            <td>{{shipping.0.fields.address1}}</td>
+          </tr>
+          <tr>
+            <th scope="row">住所2</th>
+            <td>{{shipping.0.fields.address2}}</td>
+          </tr>
+          <tr>
+            <th scope="row">電話番号</th>
+            <td>{{shipping.0.fields.tel}}</td>
+          </tr>
+        </tbody>
+      </table>
+ 
+      <h2 class="my-4">注文アイテム一覧</h2>
+      <table class="table mb-5">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">画像</th>
+            <th scope="col">品名</th>
+            <th scope="col">単価</th>
+            <th scope="col">Formats</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td><a href="/items/{{item.pk}}"><img src="/{{item.image}}" width="auto" height="100px"></a></td>
+            <td>{{ item.name }}</td>
+            <td>${{item.price}}</td>
+            <td>
+              {% for capture in item.captures %}
+              <a href="/{{capture.data}}">{{capture.format_id}}</a> <i class="bi bi-file-zip"></i><br>
+              {% endfor %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+ 
+{% endblock %}

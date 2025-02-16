@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+    }
+    .about-us-section {
+        background-color: #f8f9fa;
+        padding: 60px 0;
+    }
+    .about-us-header {
+        text-align: center;
+        margin-bottom: 40px;
+        font-weight: bold;
+        font-size: 2.5rem;
+        color: #343a40;
+    }
+    .about-us-text {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: #495057;
+    }
+    .about-us-card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+    }
+    .subheading {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-top: 20px;
+        color: #343a40;
+    }
+</style>
+<div class="container about-us-section">
+    <div class="row">
+        <div class="col-lg-8 mx-auto about-us-card">
+            <h2 class="about-us-header">ABOUT US</h2>
+            
+            <div>
+                <p class="subheading">Who We Are</p>
+                <p class="about-us-text">
+                    Our company is based in Japan and specializes in capturing guitar amplifiers and other guitar gear. We provide versatile and high-quality capture technology that eliminates the need for physical equipment, catering to the diverse needs of musicians and creators.
+                </p>
+            </div>
+
+            <div>
+                <p class="subheading">Our Capture Technology</p>
+                <p class="about-us-text">
+                    Our captures cover all channels of guitar amplifiers, capturing preamp gain in whole-number units and, when necessary, allowing for adjustments in decimal units. This precise capture allows musicians to freely create their ideal sound.
+                </p>
+            </div>
+
+            <div>
+                <p class="subheading">Versatility Across Platforms</p>
+                <p class="about-us-text">
+                    Furthermore, we prioritize versatility and currently support various platforms such as 
+                    <a href="https://www.ikmultimedia.com/products/tonex/" target="_blank" rel="noopener noreferrer">TONEX</a>, 
+                    <a href="https://www.stltones.com/products/stl-tonehub-plugin" target="_blank" rel="noopener noreferrer">ToneHub Tracer</a>, and 
+                    <a href="https://www.neuralampmodeler.com/users" target="_blank" rel="noopener noreferrer">Neural Amp Modeler</a>, 
+                    providing an environment that accommodates a wide range of users.
+                </p>
+            </div>
+
+            <div>
+                <p class="subheading">Commitment to Sound Quality</p>
+                <p class="about-us-text">
+                    We are also dedicated to ensuring the highest sound quality by carefully selecting our equipment and sound capture environment. From audio interfaces and cables to the humidity of the recording space, we take meticulous care in creating an optimal environment to deliver the best sound.
+                </p>
+            </div>
+
+            <div>
+                <p class="subheading">Our Continuous Pursuit of Excellence</p>
+                <p class="about-us-text">
+                    Our technology enables more efficient music production and richer expressions, and we continuously strive to pursue the highest quality in all that we do.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
