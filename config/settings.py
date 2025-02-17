@@ -145,7 +145,8 @@ STATICFILES_DIRS = [BASE_DIR/'static']
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR)
 if not DEBUG: #本番環境ではC直下に置く
-    MEDIA_ROOT = os.path.join('/')
+    STATIC_ROOT = '/usr/share/nginx/html/static'
+    MEDIA_ROOT = '/usr/share/nginx/html'
 
 # 消費税率
 TAX_RATE = 0.1
