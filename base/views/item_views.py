@@ -12,7 +12,7 @@ class IndexListView(ListView):
         categories = Category.objects.all().order_by('order')
         category_dict_list = []
         for category_obj in categories:
-            items = Item.objects.filter(category=category_obj.pk).order_by('-created_at')
+            items = Item.objects.filter(category=category_obj.pk, is_published=True).order_by('-created_at')
             dic = {category_obj:items}
             category_dict_list.append(dic)
         context['dict_list'] = category_dict_list

@@ -83,7 +83,7 @@
             <td>${{item.price}}</td>
             <td>
               {% for capture in item.captures %}
-              <a href="/{{capture.data}}">{{capture.format_id}}</a> <i class="bi bi-file-zip"></i><br>
+              <a href="/downloads/capture/{{capture.id}}/">{{capture.format_id}}</a> <i class="bi bi-file-zip"></i><br>
               {% endfor %}
             </td>
           </tr>

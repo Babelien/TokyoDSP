@@ -9,8 +9,8 @@ import json
 
 class Download(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        capture = Capture.objects.get(id=kwargs['pk'])
-
+        capture = Capture.objects.get(id=kwargs['id'])
+        
         orders = Order.objects.filter(user=request.user)
         for order in orders:
             items = json.loads(order.items)

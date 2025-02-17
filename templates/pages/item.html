@@ -19,13 +19,24 @@
           {% endfor %}
         </p>
         <p class="lead">${{object.price}}</p>
-        <p class="lead">{{object.description}}</p>
+        <p class="lead">{{object.description | linebreaks}}</p>
+
+        <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" 
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1971026340&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+        </iframe>
+        <div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
+          <a href="https://soundcloud.com/tokyo-dsp" title="Tokyo DSP" target="_blank" 
+          style="color: #cccccc; text-decoration: none;">Tokyo DSP</a> · 
+          <a href="{{object.soundcloud_url}}" title="{{object.name}} Sound Demo" 
+          target="_blank" style="color: #cccccc; text-decoration: none;">{{object.name}} Sound Demo</a>
+        </div>
+
         {% if purchased_formats %}
         <div class="lead">You have already puachased these formats</div>
         {% endif %}
         <ul>
           {% for purchased in purchased_captures %}
-          <li><a href="/{{purchased.data}}">{{purchased.format}}</a> <i class="bi bi-file-zip"></i></li>
+          <li><a href="/downloads/capture/{{purchased.id}}/">{{purchased.format}}</a> <i class="bi bi-file-zip"></i></li>
           {% endfor %}
         </ul>
 

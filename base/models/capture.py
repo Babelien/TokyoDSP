@@ -5,7 +5,7 @@ import os
 def upload_data_to(instance, filename):
     name = instance.item.name.replace(' ','')
     format = instance.format.name.replace(' ','')
-    return os.path.join('downloads','capture', name, format, instance.id, filename)
+    return os.path.join('downloads','capture', name, format, filename)
 
 class Capture(models.Model):
     id = models.CharField(default=create_id, primary_key=True,

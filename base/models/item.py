@@ -41,6 +41,7 @@ class Item(models.Model):
     name = models.CharField(default='', max_length=50)
     price = models.PositiveIntegerField(default=0)
     description = models.TextField(default='', blank=True)
+    soundcloud_url = models.URLField(blank=True)
     sold_count = models.PositiveIntegerField(default=0)
     is_published = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

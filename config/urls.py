@@ -41,7 +41,7 @@ urlpatterns = [
     path('orders/', views.OrderIndexView.as_view()),
     path('orders/<str:pk>/', views.OrderDetailView.as_view()),
 
-    path('downloads/capture/<str:item>/<str:format>/<str:pk>/<str:filename>/', views.Download.as_view()),
+    path('downloads/capture/<str:id>/', views.Download.as_view()),
 
     path('about_us/', views.AboutUsView.as_view()),
 ]
