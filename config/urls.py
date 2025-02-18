@@ -44,6 +44,7 @@ urlpatterns = [
     path('downloads/capture/<str:id>/', views.Download.as_view()),
 
     path('about_us/', views.AboutUsView.as_view()),
+    path('legal_information/', views.LegalInformationView.as_view()),
 ]
 
 if settings.DEBUG:

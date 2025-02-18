@@ -4,3 +4,4 @@ from .pay_views import *
 from .order_views import *
 from .download_views import *
 from .about_us_views import *
+from .legal_information_views import *
