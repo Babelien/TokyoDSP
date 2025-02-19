@@ -13,11 +13,6 @@ stripe.api_key = settings.STRIPE_API_SECRET_KEY
 def delete_unconfirmed_order(user_id):
     orders = Order.objects.filter(user=user_id, is_confirmed=False)
     for order in orders:
-        for elem in json.loads(order.items):
-            item = Item.objects.get(pk=elem['pk'])
-            item.sold_count -= 1
-            item.save()
-
         order.delete()
 
 
@@ -34,6 +29,11 @@ class PaySuccessView(LoginRequiredMixin, TemplateView):
         order.is_confirmed = True
         order.save()
 
+        for elem in json.loads(order.items):
+            item = Item.objects.get(pk=elem['pk'])
+            item.sold_count += 1
+            item.save()
+
         delete_unconfirmed_order(request.user)
 
         del request.session['cart']
@@ -44,18 +44,7 @@ class PayCancelView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/cancel.html'
 
     def get(self, request, *args, **kwargs):
-        order_id = request.GET.get('order_id')
-        orders = Order.objects.filter(user=request.user, id=order_id)
-        order = orders[0]
-        
-        for elem in json.loads(order.items):
-            item = Item.objects.get(pk=elem['pk'])
-            item.sold_count -= 1
-            item.save()
-
-        if not order.is_confirmed:
-            order.delete()
-
+        delete_unconfirmed_order(request.user)
         return super().get(request, *args, **kwargs)
     
 tax_rate = stripe.TaxRate.create(
@@ -106,9 +95,6 @@ class PayWithStripe(LoginRequiredMixin, View):
                 }
             )
 
-            item.sold_count += 1
-            item.save()
-
         delete_unconfirmed_order(request.user)
 
         order = Order.objects.create(
@@ -126,6 +112,6 @@ class PayWithStripe(LoginRequiredMixin, View):
             line_items=line_items,
             mode='payment',
             success_url=f'{settings.MY_URL}pay/success/?order_id={order.pk}',
-            cancel_url=f'{settings.MY_URL}pay/cancel/?order_id={order.pk}',
+            cancel_url=f'{settings.MY_URL}pay/cancel/',
         )
         return redirect(checkout_session.url)

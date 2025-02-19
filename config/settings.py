@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 root = environ.Path(BASE_DIR / 'secrets')
 
-DEBUG = True
+DEBUG = False
 #デバッグ用
 if(DEBUG):
     env.read_env(root('.env.dev'))
