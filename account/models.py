@@ -34,6 +34,7 @@ class User(AbstractBaseUser):
     username = models.CharField(
         max_length=50, blank=True, default='Anonymous')
     email = models.EmailField(max_length=255, unique=True)
+    newsletter = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     objects = UserManager()

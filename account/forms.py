@@ -6,7 +6,7 @@ class UserCreationForm(forms.ModelForm):
  
     class Meta:
         model = get_user_model()
-        fields = ('username', 'email', 'password', )
+        fields = ('username', 'email', 'password', 'newsletter',)
  
     def clean_password(self):
         password = self.cleaned_data.get("password")

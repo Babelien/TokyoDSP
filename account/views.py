@@ -48,7 +48,7 @@ class Logout(LogoutView):
 class AccountUpdateView(LoginRequiredMixin, UpdateView):
     model = get_user_model()
     template_name = 'pages/account.html'
-    fields = ('username', 'email')
+    fields = ('username', 'email', 'newsletter',)
     success_url = '/account/'
 
     def get_object(self):

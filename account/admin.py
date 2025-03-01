@@ -10,7 +10,7 @@ class ProfileInline(admin.StackedInline):
 class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password',)}),
-        (None, {'fields': ('is_active', 'is_admin',)}),
+        (None, {'fields': ('is_active', 'is_admin', 'newsletter',)}),
     )
  
     list_display = ('username', 'email', 'is_active',)
