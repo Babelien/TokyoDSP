@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import DetailView, CreateView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetDoneView, \
                                       PasswordResetConfirmView, PasswordResetCompleteView
@@ -56,7 +56,7 @@ class AccountUpdateView(LoginRequiredMixin, UpdateView):
         return super().get_object()
     
     def post(self, request, *args, **kwargs):
-        if request.POST.get('current_password'):
+        if request.POST.get('password'):
             user = User.objects.get(pk=request.user.pk)
             valid = True
             if not user.check_password(request.POST.get('current_password')):
@@ -65,11 +65,13 @@ class AccountUpdateView(LoginRequiredMixin, UpdateView):
 
             if request.POST.get('password') != request.POST.get('password_confirm'):
                 valid = False
-                messages.error(request, 'Mismatch new passwords')
+                messages.error(request, 'Mismatch new password and confirmation')
 
-            if valid:
-                user.password = hashers.make_password(request.POST.get('password'))
-                user.save()
+            if not valid:
+                return redirect('/account/')
+        
+            user.password = hashers.make_password(request.POST.get('password'))
+            user.save()
             
         return super().post(request, *args, **kwargs)
     
